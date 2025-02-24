@@ -42,12 +42,19 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('تم التسجيل بنجاح!')
-        return redirect(url_for('login'))
+        try:
+            user = User(username=form.username.data, email=form.email.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول', 'success')
+            return redirect(url_for('login'))
+        except Exception as e:
+            db.session.rollback()
+            flash('حدث خطأ أثناء التسجيل. الرجاء المحاولة مرة أخرى', 'error')
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(f'{getattr(form, field).label.text}: {error}', 'error')
     return render_template('register.html', form=form)
 
 @app.route('/logout')
