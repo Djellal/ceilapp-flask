@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}المستخدمون المسجلون{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>المستخدمون المسجلون</h2>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>اسم المستخدم</th>
+                        <th>البريد الإلكتروني</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
