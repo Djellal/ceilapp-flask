@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}غير مصرح{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    <h4 class="alert-heading">خطأ في الصلاحيات</h4>
+    <p>عذراً، لا تملك الصلاحيات الكافية للوصول إلى هذه الصفحة.</p>
+    <hr>
+    <p class="mb-0">
+        <a href="{{ url_for('home') }}" class="alert-link">العودة إلى الصفحة الرئيسية</a>
+    </p>
+</div>
+{% endblock %}
